@@ -1,0 +1,7 @@
+﻿To start project
+
+--add project, inside of it tsconfig.e2e.json and protractor.conf.js--
+
+npm install --save-dev jasmine-spec-reporter ts-node protractor
+node_modules/protractor/bin/webdriver-manager update
+npm i "@types/jasminewd2" --save-dev

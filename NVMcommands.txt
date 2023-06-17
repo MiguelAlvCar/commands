@@ -1,0 +1,9 @@
+﻿NVM
+nvm ls-remote: show every possible version to install
+nvm list available: (for windows )show every possible version to install
+nvm install 8.16.2
+nvm uninstall 8.16.2
+nvm ls
+nvm use 10.16.3
+nvm use –lts
+nvm alias default 10.0.0
