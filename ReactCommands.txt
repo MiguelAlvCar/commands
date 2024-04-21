@@ -1,0 +1,13 @@
+npx create-react-app algo
+yarn create react-app algo --template typescript
+
+[HTTPS=true] yarn start
+npm start
+
+npm install
+
+
+control + shift + p: to open the JavaScript Debug Terminal (Packet Javascript debugger)
+and: npm test --watch: to run the test
+
+npm test -t 'checkNummernkreis': to run tests based on pattern (for me it works as with option --watch)

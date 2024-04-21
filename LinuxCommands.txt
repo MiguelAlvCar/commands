@@ -1,0 +1,97 @@
+*Ctrl [Alt] F3-F6*: virtuelle Terminal. Alt: von dem GUI.
+*Ctrl F1/F2*: GUI, F1:neue Benutzer, F2: gleicher Benutzer.
+
+echo <$0 / $PATH>: shows: $0 the name of the executing program / $PATH: paths of the directories of the programs able to be called.
+export <variable(e. g. PATH without “$”)>=<new value(e. g. $PATH:.)>: sets a value for a variable.
+{command} &: output not on screen, it shows Process-ID.
+*Ctrl Z*: like & but belated.
+fg <Process-ID>: (foreground) 
+find . -name a* : all files in the current directory, that begin with ‘a’.
+{first part of command} \ *Enter* {second part of command}
+type {command}: shows what a command it is (alias, shell builtin, program…)
+sudo su: changes to admin
+su <user name>: changes the user.
+man [<category>] <command>: manual
+info <command>: more detailed info than manual.
+whatis <entry>: shows the category and what it is.
+
+Pipes and out- and inputs
+{command} > {output target: e. g. file}: writes the output of the command in the target
+{command} >> {output target: e. g. file}: appends the output of the command in the target
+{command} < {source input: e. g. file}: uses the source for the input of the command.
+{command} << {expression}: let write the input until the expression occurs
+{command} | {command}: uses the output of the first command for the input of the second.
+{command} ; {command}: executes several commands one after another.
+{command} && {command}: executes several commands one after another, only if the previous command successes.
+… `{command}` …: uses the output of a command in the currend shell command.
+
+Files and directories
+Patterns in the unix-shells: * ? [0-9] [!abc] [a-z0-9] {info, hilfe}  a*|info*
+cp < source > <target> [-R]: copy: e. g. co briefe/* dokumente (copies all documents in ‘briefe’ to ‘dokumente’) –R: recursive: copies all subdirectories and their documents.
+mv < source > <target>: move. Also used to rename documents.
+rm <file/pattern> [-r -f]: remove. –r: recursive. –f: remove the write-protected files.
+ls [pattern] [-l –a –h]: list. –l: detailed information, -a: all, also hidden files, -h human readable
+pwd: print working directory.
+cd <path>: change directory.
+mkdir <directory name>: make directory
+chmod <user? [-+=] right?/octal numbers> <file / directory>: change mode. users: u: user, g: group, o: others, a: all. -: remove right, +: add right, =: substitude the other rights. rights: r: read, w: write, x: execute. e.g.: chmod 0755 test.txt / chmod a+r directory
+chown <user>[:<group>] <file/pattern>: change owner. 
+chgrp: change group.
+ln [-s –f] <source file> <target file>: creates a hardling (standard) or a symlink (-s)
+
+Text manipulation
+cat <input: <file1> <file2>…>: concatenate/catalog. e g.: cat > new.txt << ENDE (creates a new text-file)
+head -<number> <text file>: shows the begin of the text file.
+tail -<number> <text file>:
+less <input>
+grep [-r -i] <regular expression> <input>: general regular expression print. –r: recursive (for the subdirectories), -i: case insensitive. e.g.: ls |grep ^in
+diff: shows the differences between two text files.
+wc: word count. –c: characters, -w: words, -l: lines.
+
+System management
+mount [file system] <device file(/dev/…)> <directory>: mounts the data medium in the directory tree. The directory must exist and be empty.
+umount
+du [-h]: disk usage in kilobyte.
+mkfs: make file system: format a data medium with a file system. –t: to indicate the fily system
+date [+”output-expression” and <format>]: reads and changes the date and the time. To change: HHDDhhmm[YY]YY[.ss]
+useradd: -d: indicates the path different than /home/user (that hat to be made before and then owned by the new user). –m: new home directory. –g: group. –s: indicates the standard shell. –u: User-ID.
+userdel:
+groupadd. –g: group-ID
+passwd: as root can be made: passwd <user name> to change any password.
+ps: table with all processes
+pstree
+kill [-s signal]: give a process a signal: TERM (standard, ends the process), KILL (forced end) and INT (interrupt). –l: list of all signals.
+shutdown [now/hh:mm/+m]: -h: halt (shutdown, standard), -r: restart.
+
+rpm –I <Packet name>: installs a packet under Red Hat and SUSE.
+apt-get install <packet name>: install a packet under Debian.
+alias <alias name>=’<command>’
+
+Network configuration
+ifconfig: overall view with the name of the network interface (eth0, lo…)
+ping <host name>: porves if the host is reachable.
+traceroute <host>: show the Router in the way to the router.
+netstat: list all TCP and UDP connections.
+nslookup / dig <host> <nameserver>: convert the IP into an address and reversely.
+
+
+Comprimierung
+tar -f [-c, -r, -v] <archivdatei.tar> <datei1> <datei2>: -c: speichern neue Datei, -r: anhängen an bestehen Datei, -f: um nicht die Datei auf einem Bandlaufwerk, -v: verbose
+tar -x -f [-v]  <archivdatei.tar>: Datei extrahieren.
+tar -f [-c, -r, -v, -z, -j] <archivdatei.tar> <datei1> <datei2>: -z: comprimiert auch nach gzip, -j: nach bzip2.
+gzip <archivdatei.tar>
+gunzip <comprimierte Datei>
+bzip2 <archivdatei.tar>
+bunzip2 <comprimierte Datei>
+zip <archivdatei.tar> <datei1> <datei2>: die Windows zip.
+unzip <archivdatei.tar>
+
+Importans Paths
+/etc/re<number of the runlevel>.d: for the programs and symlinks to be started at the runlevels
+programs for the run levels: ^[SK]{2, [0-9]}   S: start-script, K: kill-script, number: the priority of the script. e. g.: /etc/re5.d/S15apache
+/etc/cron.<hourly/daily/weekly/monthly>: directory for symlinks to scripts to automatic execute them.
+/etc/crontab: file to automatic execution. Row format: min hour day month weekday command. E. g.:
+0 18 * * 5 <command>: every Friday at 18
+0 * * * * <command>: every hour.
+0 8-18 * * 1-6 <command>: Monday til Saturday hourly between 8 and 18.
+0 */2 * * * <command>: every 2 hours.
