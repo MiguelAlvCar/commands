@@ -1,7 +1,7 @@
 git init 
 git clone <URL of the remote repository to clone from>
 git remote add <name of the new remote> <url of the remote>: adds a remote repository
-git config --global alias.<name of the alias> ‘<git command>’ 
+git config --global alias.<name of the alias> "<git command>" 
 git config --bool core.bare true : make a repository bare, without working directory
 git add <file name/ “.”>: add all files to the stage
 git commit [–m ‘<message>’]
